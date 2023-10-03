@@ -2,15 +2,17 @@ import { useEffect, useRef } from 'react'
 import { UseChatHelpers } from 'ai/react'
 import Textarea from 'react-textarea-autosize'
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import { IconArrowElbow, IconHome, IconPlus } from '@/components/ui/icons'
+import { Button } from '@/components/ui/button'
+import { IconArrowElbow } from '@/components/ui/icons'
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger
 } from '@/components/ui/tooltip'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
-import { cn } from '@/lib/utils'
+import { VoiceInputButton } from '@/components/voice-input-button'
+import { useVoiceInput } from '@/lib/hooks/use-voice-input'
+
 
 
 export interface PromptProps
@@ -27,12 +29,22 @@ export function PromptForm({
 }: PromptProps) {
     const { formRef, onKeyDown } = useEnterSubmit()
     const inputRef = useRef<HTMLTextAreaElement>(null)
+    const { transcript, isRecording, handleToggleRecording } = useVoiceInput()
 
     useEffect(() => {
         if (inputRef.current) {
             inputRef.current.focus()
         }
     }, [])
+
+    console.log('live transcript', transcript)
+
+    useEffect(() => {
+        if (transcript) {
+            console.log('transcript changed', transcript)
+            setInput(transcript)
+        }
+    }, [transcript])
 
     return (
         <form
@@ -46,36 +58,25 @@ export function PromptForm({
             }}
             ref={formRef}
         >
-            <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <button
-                            onClick={() => {
-                                location.href = '/'
-                            }}
-                            className={cn(
-                                buttonVariants({ size: 'sm', variant: 'outline' }),
-                                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4'
-                            )}
-                        >
-                            <IconHome />
-                            <span className="sr-only">New Chat</span>
-                        </button>
-                    </TooltipTrigger>
-                    <TooltipContent>New Chat</TooltipContent>
-                </Tooltip>
-                <Textarea
-                    ref={inputRef}
-                    tabIndex={0}
-                    onKeyDown={onKeyDown}
-                    rows={1}
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    placeholder="Send a message."
-                    spellCheck={false}
-                    className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
-                />
-                <div className="absolute right-0 top-4 sm:right-4">
+            <div className='relative'>
+                <div className="absolute bottom-3 left-0 sm:left-4">
+                    <VoiceInputButton isRecording={isRecording} handleToggleRecording={handleToggleRecording} />
+                </div>
+                <div className="flex max-h-[140px] w-full grow overflow-scroll bg-background px-8 sm:rounded-md sm:border sm:px-12">
+                    <Textarea
+                        ref={inputRef}
+                        tabIndex={0}
+                        onKeyDown={onKeyDown}
+                        rows={1}
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        placeholder="Send a message."
+                        spellCheck={false}
+                        className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+                    />
+
+                </div>
+                <div className="absolute bottom-3 right-0 sm:right-4">
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button

@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
 import { IconMoon, IconSpinner, IconSun } from '@/components/ui/icons'
-import useIsClientMounted from '@/lib/hooks/use-is-client-mounted'
+import { useIsClientMounted } from '@/lib/hooks/use-is-client-mounted'
 
 
 export function ThemeToggle() {

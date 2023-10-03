@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function useIsClientMounted() {
+export function useIsClientMounted() {
     const [isClientMounted, setIsClientMounted] = useState(false);
     useEffect(() => {
         setIsClientMounted(true);
