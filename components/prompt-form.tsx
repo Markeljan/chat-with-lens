@@ -29,7 +29,9 @@ export function PromptForm({
 }: PromptProps) {
     const { formRef, onKeyDown } = useEnterSubmit()
     const inputRef = useRef<HTMLTextAreaElement>(null)
-    const { transcript, isRecording, handleToggleRecording } = useVoiceInput()
+    const { transcript, isRecording, handleToggleRecording } = useVoiceInput(() => {
+        formRef.current?.requestSubmit()
+    })
 
     useEffect(() => {
         if (inputRef.current) {
@@ -37,11 +39,8 @@ export function PromptForm({
         }
     }, [])
 
-    console.log('live transcript', transcript)
-
     useEffect(() => {
         if (transcript) {
-            console.log('transcript changed', transcript)
             setInput(transcript)
         }
     }, [transcript])

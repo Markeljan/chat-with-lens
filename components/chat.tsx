@@ -7,6 +7,8 @@ import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
+import { useTextToSpeech } from '@/lib/hooks/use-text-to-speech'
+import { useEffect } from 'react'
 
 
 export interface ChatProps extends React.ComponentProps<'div'> {
@@ -23,7 +25,16 @@ export function Chat({ initialMessages, className }: ChatProps) {
                 }
             }
         })
-        
+
+    const toggleAudio = useTextToSpeech()
+
+    useEffect(() => {
+        if (!isLoading && messages[messages.length - 1]?.content) {
+            toggleAudio(messages[messages.length - 1]?.content)
+        }
+    }, [messages, isLoading])
+
+
     return (
         <>
             <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>

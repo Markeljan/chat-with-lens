@@ -8,7 +8,7 @@ declare global {
     }
 }
 
-export function useVoiceInput() {
+export function useVoiceInput(handleInputSpeechEnd: () => void = () => { }) {
     const [isRecording, setIsRecording] = useState(false);
     const [transcript, setTranscript] = useState("");
     const recognitionRef = useRef<any>(null)
@@ -39,7 +39,7 @@ export function useVoiceInput() {
         };
 
         recognitionRef.current.onspeechend = () => {
-            console.log("Speech endDDDDDDDddddDDDD");
+            handleInputSpeechEnd();
         };
 
         // Start the speech recognition
