@@ -1,8 +1,6 @@
 import { Chat } from '@/components/chat'
 import ProfileEmbed from './lens/profile-embed'
 
-export const runtime = 'edge'
-
 export default function Home() {
   return <div className="max-w">
     <div className="flex justify-center mt-2 mb-1 max-w-[350px] lg:max-w-[400px] mx-auto">

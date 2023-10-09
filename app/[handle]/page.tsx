@@ -1,6 +1,5 @@
 import { Chat } from '@/components/chat'
 import ProfileEmbed from '../lens/profile-embed'
-export const runtime = 'edge'
 
 export default function Home({ params }: { params: { handle: string } }) {
   return <div className="max-w">
