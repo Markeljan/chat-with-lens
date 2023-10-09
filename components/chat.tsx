@@ -9,16 +9,23 @@ import { ChatPanel } from '@/components/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useTextToSpeech } from '@/lib/hooks/use-text-to-speech'
 import { useEffect } from 'react'
-
+import usePublicationContent from '@/app/lens/use-publication-content'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
 }
 
-export function Chat({ initialMessages, className }: ChatProps) {
+export function Chat({ className }: ChatProps) {
+    const publicationContentString = usePublicationContent({ handle: 'stani' })
+    const publicationContentMessage = {
+        id: '0',
+        role: 'system' as const,
+        content: publicationContentString
+    }
+
     const { messages, append, reload, stop, isLoading, input, setInput } =
         useChat({
-            initialMessages,
+            initialMessages: [publicationContentMessage],
             onResponse(response) {
                 if (response.status === 401) {
                     toast.error(response.statusText)

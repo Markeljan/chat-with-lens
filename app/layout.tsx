@@ -12,8 +12,8 @@ const APP_URL = new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://chat.vercel.
 
 export const metadata: Metadata = {
   metadataBase: APP_URL,
-  title: 'AI Chatbot',
-  description: 'AI Chatbot built with Next.js, Vercel AI, shadcn.',
+  title: 'DID Chat',
+  description: 'DID Chat is built with Next.js, Vercel AI, shadcn.',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png'
   },
   openGraph: {
-    title: 'AI Chatbot',
-    description: 'AI Chatbot built with Next.js, Vercel AI, shadcn.',
+    title: 'DID Chat',
+    description: 'DID Chat is built with Next.js, Vercel AI, shadcn.',
     url: APP_URL,
-    siteName: 'AI Chatbot',
+    siteName: 'DID Chat',
     images: [
       {
         url: (APP_URL + '/opengraph-image.png'),
-        alt: 'AI Chatbot',
+        alt: 'DID Chat',
         width: 1686,
         height: 882,
       },
@@ -40,19 +40,20 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
-    title: 'AI Chatbot',
-    description: 'AI Chatbot built with Next.js, Vercel AI, shadcn.',
+    title: 'DID Chat',
+    description: 'DID Chat is built with Next.js, Vercel AI, shadcn.',
     site: APP_URL.toString(),
     images: [
       {
         url: (APP_URL + '/twitter-image.png'),
-        alt: 'AI Chatbot',
+        alt: 'DID Chat',
         width: 1686,
         height: 882,
       },
     ],
   },
 }
+
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -72,11 +73,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Toaster />
         <Providers attribute="class" defaultTheme="system" enableSystem >
           <div className="flex flex-col min-h-screen">
-              <Header />
+            <Header />
             <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
           </div>
         </Providers>
-
       </body>
     </html>
   )
