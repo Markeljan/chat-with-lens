@@ -9,6 +9,7 @@ import { ChatPanel } from '@/components/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useTextToSpeech } from '@/lib/hooks/use-text-to-speech'
 import usePublicationContent from '@/app/lens/use-publication-content'
+import ProfileEmbed from '@/app/lens/profile-embed'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
@@ -42,10 +43,15 @@ export function Chat({ className, handle }: ChatProps & { handle: string }) {
             <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
                 {messages.length ? (
                     <>
+                        <div className="flex justify-center mt-2 mb-1 max-w-[350px] lg:max-w-[400px] mx-auto">
+                            <ProfileEmbed handle='stani' />
+                        </div>
                         <ChatList messages={messages} voiceId={voiceId} />
                         <ChatScrollAnchor trackVisibility={isLoading} />
                     </>
-                ) : <></>
+                ) : <>    <div className="flex justify-center mt-2 mb-1 max-w-[350px] lg:max-w-[400px] mx-auto">
+                    <ProfileEmbed handle='stani' />
+                </div></>
                 }
             </div>
             <ChatPanel

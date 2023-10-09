@@ -3,9 +3,14 @@
 import { useState, useCallback, useEffect } from "react";
 
 export function useTextToSpeech() {
-    const [audioElement] = useState<HTMLAudioElement>(new Audio());
+    const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [audioSource, setAudioSource] = useState<AudioBufferSourceNode | null>(null);
+
+
+    useEffect(() => {
+        setAudioElement(new Audio());
+    }, []);
 
     const toggleAudio = useCallback(async (text: string, voiceId: string) => {
         if (isPlaying && audioSource) {
@@ -30,6 +35,9 @@ export function useTextToSpeech() {
         }
 
         const audioURL = URL.createObjectURL(await response.blob());
+        if (!audioElement) {
+            return;
+        }
         audioElement.src = audioURL;
         audioElement.controls = true;
 

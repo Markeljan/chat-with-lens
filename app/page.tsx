@@ -3,9 +3,6 @@ import ProfileEmbed from './lens/profile-embed'
 
 export default function Home() {
   return <div className="max-w">
-    <div className="flex justify-center mt-2 mb-1 max-w-[350px] lg:max-w-[400px] mx-auto">
-      <ProfileEmbed handle='stani' />
-    </div>
-    <Chat handle='stani' className='max-h-[50px] overflow-y-scroll' />
+    <Chat handle='stani' />
   </div>
 }
