@@ -12,10 +12,12 @@ import { useTextToSpeech } from '@/lib/hooks/use-text-to-speech'
 
 interface ChatMessageActionsProps extends React.ComponentProps<'div'> {
     message: Message
+    voiceId: string
 }
 
 export function ChatMessageActions({
     message,
+    voiceId,
     className,
     ...props
 }: ChatMessageActionsProps) {
@@ -28,7 +30,7 @@ export function ChatMessageActions({
     }
 
     const onToggleAudio = () => {
-        toggleAudio(message.content)
+        toggleAudio(message.content, voiceId)
     }
 
 

@@ -10,9 +10,10 @@ import { ChatMessageActions } from '@/components/chat-message-actions'
 
 export interface ChatMessageProps {
     message: Message
+    voiceId: string
 }
 
-export function ChatMessage({ message, ...props }: ChatMessageProps) {
+export function ChatMessage({ message, voiceId, ...props }: ChatMessageProps) {
 
     if (message.role === 'system') return
     return (
@@ -73,7 +74,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
                 >
                     {message.content}
                 </MemoizedReactMarkdown>
-                <ChatMessageActions message={message} />
+                <ChatMessageActions message={message} voiceId={voiceId} />
             </div>
         </div>
     )
