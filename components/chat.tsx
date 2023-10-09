@@ -44,13 +44,13 @@ export function Chat({ className, handle }: ChatProps & { handle: string }) {
                 {messages.length ? (
                     <>
                         <div className="flex justify-center mt-2 mb-1 max-w-[350px] lg:max-w-[400px] mx-auto">
-                            <ProfileEmbed handle='stani' />
+                            <ProfileEmbed handle={handle} />
                         </div>
                         <ChatList messages={messages} voiceId={voiceId} />
                         <ChatScrollAnchor trackVisibility={isLoading} />
                     </>
                 ) : <>    <div className="flex justify-center mt-2 mb-1 max-w-[350px] lg:max-w-[400px] mx-auto">
-                    <ProfileEmbed handle='stani' />
+                    <ProfileEmbed handle={handle} />
                 </div></>
                 }
             </div>
