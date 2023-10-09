@@ -8,15 +8,15 @@ import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useTextToSpeech } from '@/lib/hooks/use-text-to-speech'
-import { useEffect, useState } from 'react'
 import usePublicationContent from '@/app/lens/use-publication-content'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
     initialMessages?: Message[]
 }
 
-export function Chat({ className }: ChatProps) {
-    const publicationContentString = usePublicationContent({ handle: 'stani' })
+export function Chat({ className, handle }: ChatProps & { handle: string }) {
+    const publicationContentString = usePublicationContent({ handle: handle || 'stani' })
+    const voiceId = handle === 'stani' ? 'VlV52zS5NCUt9NPe1OcZ' : handle === 'nader' ? '3HBw1sEab1KBYMDEugo6' : handle === 'markeljan' ? 'nQBi4oZIEJAdZGHGtOpV' : '1rEpyS4Ro5Yt7Yiodu6s'
     const publicationContentMessage = {
         id: '0',
         role: 'system' as const,
@@ -33,7 +33,7 @@ export function Chat({ className }: ChatProps) {
                 }
             },
             onFinish(message) {
-                toggleAudio(message.content)
+                toggleAudio(message.content, voiceId)
             }
         })
 

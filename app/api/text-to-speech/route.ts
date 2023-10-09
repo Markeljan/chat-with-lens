@@ -3,8 +3,7 @@ export const runtime = 'edge'
 export async function POST(req: Request) {
 
     const json = await req.json();
-    const { text } = json;
-    const voiceId = 'nQBi4oZIEJAdZGHGtOpV'
+    const { text, voiceId } = json;
 
     const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream`, {
         method: 'POST',
@@ -19,8 +18,8 @@ export async function POST(req: Request) {
             voice_settings: {
                 similarity_boost: 1,
                 stability: 0.3,
-                style: 0, //0.25 is better but too slow
-                use_speaker_boost: false //true is better but too slow
+                style: 0.25,
+                use_speaker_boost: true
             }
         })
     });

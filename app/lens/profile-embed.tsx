@@ -10,5 +10,6 @@ export default function ProfileEmbed({ handle }: { handle?: string }) {
     return <Profile
         handle={handle || "stani"}
         theme={resolvedTheme as Theme}
+        containerStyle={{ width: '100%', height: '100%' }}
     />
 }
