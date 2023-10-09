@@ -8,7 +8,7 @@ import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useTextToSpeech } from '@/lib/hooks/use-text-to-speech'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import usePublicationContent from '@/app/lens/use-publication-content'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
@@ -22,6 +22,7 @@ export function Chat({ className }: ChatProps) {
         role: 'system' as const,
         content: publicationContentString
     }
+    const toggleAudio = useTextToSpeech()
 
     const { messages, append, reload, stop, isLoading, input, setInput } =
         useChat({
@@ -30,17 +31,11 @@ export function Chat({ className }: ChatProps) {
                 if (response.status === 401) {
                     toast.error(response.statusText)
                 }
+            },
+            onFinish(message) {
+                toggleAudio(message.content)
             }
         })
-
-    const toggleAudio = useTextToSpeech()
-
-    useEffect(() => {
-        if (!isLoading && messages[messages.length - 1]?.content) {
-            toggleAudio(messages[messages.length - 1]?.content)
-        }
-    }, [messages, isLoading])
-
 
     return (
         <>

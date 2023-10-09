@@ -19,8 +19,8 @@ export async function POST(req: Request) {
             voice_settings: {
                 similarity_boost: 1,
                 stability: 0.3,
-                style: 0.25,
-                use_speaker_boost: true
+                style: 0, //0.25 is better but too slow
+                use_speaker_boost: false //true is better but too slow
             }
         })
     });
