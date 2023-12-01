@@ -4,7 +4,7 @@
 <img width="300" alt="image" src="https://github.com/Markeljan/chat-with-lens/assets/12901349/58f8ee93-3164-460e-b3cb-68b7bbfe563e">
 <img width="300" alt="image" src="https://github.com/Markeljan/chat-with-lens/assets/12901349/7b1c9c32-3b2e-4d16-a9c3-6cacf251aa99">
 
-Chat with Lens is an innovative project that leverages the power of AI-driven Avatars tailored for the Lens Protocol. Dive into a more interactive and personalized content consumption experience like never before powered by elevenlabs text to speech.
+Chat with Lens is an innovative project that leverages the power of AI-driven Avatars tailored for the Lens Protocol. Dive into a more interactive and personalized content consumption experience like never before powered by elevenlabs text to speech .
 
 ## Overview
 
